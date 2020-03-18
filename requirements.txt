@@ -1,0 +1,8 @@
+celery
+flask
+redis
+requests==2.18.2
+flask-swagger-ui>=3.6.0
+flask_restful
+boto3
+PyYAML>=3.12

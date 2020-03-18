@@ -1,0 +1,282 @@
+---
+swagger: "2.0"
+info:
+  description: "SDRF Editor for multiomics datasets"
+  version: "1.0.0"
+  title: "SDRF Editor API"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "ypriverol@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8090"
+basePath: "/v2"
+tags:
+- name: "properties"
+  description: "Annotation of specific SDRF columns"
+schemes:
+- "https"
+- "http"
+paths:
+  /properties/findSampleProperties:
+    get:
+      tags:
+      - "properties"
+      summary: "Find properties for rows of the SDRF samples"
+      operationId: "find_sample_properties"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "template"
+        in: "query"
+        description: "Status values that need to be considered for filter"
+        required: false
+        type: "string"
+        enum:
+        - "HUMAN"
+        - "VERTEBRATES"
+        - "NON-VERTEBRATES"
+        - "PLANTS"
+        - "CELL LINES"
+        - "DEFAULT"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/OntologyTerm"
+        "400":
+          description: "Invalid schema value"
+      x-swagger-router-controller: "swagger_server.controllers.properties_controller"
+  /properties/findDataProperties:
+    get:
+      tags:
+      - "properties"
+      summary: "Find properties for rows of the SDRF data files"
+      operationId: "find_data_properties"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "template"
+        in: "query"
+        description: "Status values that need to be considered for filter"
+        required: false
+        type: "string"
+        enum:
+        - "MASS-SPECTROMETRY "
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/OntologyTerm"
+        "400":
+          description: "Invalid schema value"
+      x-swagger-router-controller: "swagger_server.controllers.properties_controller"
+  /properties/findValuesByProperty:
+    get:
+      tags:
+      - "properties"
+      summary: "Find values for an specific property, for example possible taxonomy\
+        \ values for Organism property"
+      operationId: "find_values_by_property"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "accesssion"
+        in: "query"
+        description: "Accession of the property in the Ontology"
+        required: true
+        type: "string"
+      - name: "ontology"
+        in: "query"
+        description: "Ontology to loockup the property"
+        required: true
+        type: "string"
+      - name: "filter"
+        in: "query"
+        description: "Keyword to filter the list of possible values"
+        required: false
+        type: "string"
+      - name: "page"
+        in: "query"
+        description: "Number of the page with the possible values for the property"
+        required: false
+        type: "integer"
+        default: 0
+      - name: "pageSize"
+        in: "query"
+        description: "Number of values with the possible values for the property"
+        required: false
+        type: "integer"
+        default: 100
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/OntologyTerm"
+        "400":
+          description: "Invalid schema value"
+      x-swagger-router-controller: "swagger_server.controllers.properties_controller"
+  /complexproperties/findPostTranslationalModifications:
+    get:
+      tags:
+      - "properties"
+      summary: "Find values for an specific property, for example possible taxonomy\
+        \ values for Organism property"
+      operationId: "find_post_translational_modifications"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "filter"
+        in: "query"
+        description: "Keyword to filter the list of possible values"
+        required: false
+        type: "string"
+      - name: "page"
+        in: "query"
+        description: "Number of the page with the possible values for the property"
+        required: false
+        type: "integer"
+        default: 0
+      - name: "pageSize"
+        in: "query"
+        description: "Number of values with the possible values for the property"
+        required: false
+        type: "integer"
+        default: 100
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/PostTranslationalModification"
+        "400":
+          description: "Invalid schema value"
+      x-swagger-router-controller: "swagger_server.controllers.properties_controller"
+definitions:
+  OntologyTerm:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    - "ontology"
+    properties:
+      id:
+        type: "string"
+        example: "NCBITaxon:9606"
+        description: "Accession of the term in the ontology"
+      name:
+        type: "string"
+        example: "Homo sapiens"
+        description: "Name of the term in the ontology"
+      ontology:
+        type: "string"
+        example: "NCBITAXON"
+        description: "The ontology where the term can be found"
+      definition:
+        type: "string"
+        example: "Definition of the the ontology term"
+        description: "A general defintion of the Ontology term"
+      schema:
+        type: "array"
+        example:
+        - "HUMAN"
+        - "VERTEBRATES"
+        - "NON-VERTEBRATES"
+        - "PLANTS"
+        - "CELL LINES"
+        - "DEFAULT"
+        description: "The schema where this property is mandatory"
+        items: {}
+    example:
+      schema:
+      - "HUMAN"
+      - "VERTEBRATES"
+      - "NON-VERTEBRATES"
+      - "PLANTS"
+      - "CELL LINES"
+      - "DEFAULT"
+      name: "Homo sapiens"
+      definition: "Definition of the the ontology term"
+      id: "NCBITaxon:9606"
+      ontology: "NCBITAXON"
+  PTMSite:
+    type: "object"
+    required:
+    - "position"
+    - "site"
+    properties:
+      site:
+        type: "string"
+      position:
+        type: "string"
+        enum:
+        - "Anywhere"
+        - "Protein N-term"
+        - "Protein C-term"
+        - "Any N-term"
+        - "Any C-term"
+    example:
+      site: "site"
+      position: "Anywhere"
+  PostTranslationalModification:
+    type: "object"
+    required:
+    - "ontologyTerm"
+    properties:
+      ontologyTerm:
+        $ref: "#/definitions/OntologyTerm"
+      chemicalFormula:
+        type: "string"
+        example: "H(2)C(2)O"
+        description: "Chemical formula for the PTM"
+      sites:
+        type: "array"
+        description: "Aminoacid affected by the Posttranlational modification"
+        items:
+          $ref: "#/definitions/PTMSite"
+      monoisotopicMass:
+        type: "number"
+        example: 42.0105649999999997135091689415276050567626953125
+        description: "The exact atomic mass shift produced by the modification. Please\
+          \ use at least 5 decimal places of accuracy."
+    example:
+      chemicalFormula: "H(2)C(2)O"
+      sites:
+      - site: "site"
+        position: "Anywhere"
+      - site: "site"
+        position: "Anywhere"
+      ontologyTerm:
+        schema:
+        - "HUMAN"
+        - "VERTEBRATES"
+        - "NON-VERTEBRATES"
+        - "PLANTS"
+        - "CELL LINES"
+        - "DEFAULT"
+        name: "Homo sapiens"
+        definition: "Definition of the the ontology term"
+        id: "NCBITaxon:9606"
+        ontology: "NCBITAXON"
+      monoisotopicMass: 42.0105649999999997135091689415276050567626953125
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
