@@ -86,7 +86,7 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "accesssion"
+      - name: "accession"
         in: "query"
         description: "Accession of the property in the Ontology"
         required: true

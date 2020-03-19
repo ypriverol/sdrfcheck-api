@@ -150,3 +150,8 @@ class PostTranslationalModification(Model):
         """
 
         self._monoisotopic_mass = monoisotopic_mass
+
+    def to_str(self):
+      return super().to_str()
+
+

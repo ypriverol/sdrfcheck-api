@@ -8,7 +8,7 @@ from unimod.unimod import UnimodDatabase
 
 
 def find_data_properties(template=None):  # noqa: E501
-    """Find properties for rows of the SDRF data files
+  """Find properties for rows of the SDRF data files
 
      # noqa: E501
 
@@ -17,11 +17,11 @@ def find_data_properties(template=None):  # noqa: E501
 
     :rtype: List[OntologyTerm]
     """
-    return 'do some magic!'
+  return 'do some magic!'
 
 
 def find_post_translational_modifications(filter=None, page=0, pageSize=100):  # noqa: E501
-    """Find values for an specific property, for example possible taxonomy values for Organism property
+  """Find values for an specific property, for example possible taxonomy values for Organism property
 
      # noqa: E501
 
@@ -35,15 +35,14 @@ def find_post_translational_modifications(filter=None, page=0, pageSize=100):  #
     :rtype: List[PostTranslationalModification]
     """
 
-    unimod_database = UnimodDatabase()
-    print(unimod_database)
-    l = unimod_database.modifications
-    list = l[(page*pageSize):(page*pageSize)+pageSize]
-    return list
+  unimod_database = UnimodDatabase()
+  l = unimod_database.search_mods_by_keyword(keyword=filter)
+  list_found = l[(page * pageSize):(page * pageSize) + pageSize]
+  return list_found
 
 
 def find_sample_properties(template=None):  # noqa: E501
-    """Find properties for rows of the SDRF samples
+  """Find properties for rows of the SDRF samples
 
      # noqa: E501
 
@@ -52,11 +51,11 @@ def find_sample_properties(template=None):  # noqa: E501
 
     :rtype: List[OntologyTerm]
     """
-    return 'do some magic!'
+  return 'do some magic!'
 
 
-def find_values_by_property(accesssion, ontology, filter=None, page=None, pageSize=None):  # noqa: E501
-    """Find values for an specific property, for example possible taxonomy values for Organism property
+def find_values_by_property(accession, ontology, filter=None, page=None, pageSize=None):  # noqa: E501
+  """Find values for an specific property, for example possible taxonomy values for Organism property
 
      # noqa: E501
 
@@ -73,4 +72,4 @@ def find_values_by_property(accesssion, ontology, filter=None, page=None, pageSi
 
     :rtype: List[OntologyTerm]
     """
-    return 'do some magic!'
+  return 'do some magic!'

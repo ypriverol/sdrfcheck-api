@@ -7,7 +7,7 @@ from swagger_server.models.ontology_term import OntologyTerm
 
 
 class UnimodDatabase:
-  '''Wrapper for the Unimod database'''
+  """Wrapper for the Unimod database"""
   xmlns = '{http://www.unimod.org/xmlns/schema/unimod_2}'
   unimodfile = 'unimod.xml'
   hidden = True
@@ -23,6 +23,12 @@ class UnimodDatabase:
     self.modifications = []
     self._get_elements(node)
     self._get_modifications(node)
+
+  def search_mods_by_keyword(self, keyword: str = None):
+    found_list = self.modifications
+    if keyword is not None and len(keyword) > 0:
+      found_list = [x for x in self.modifications if re.search(keyword, x.to_str(), re.IGNORECASE)]
+    return found_list
 
   def _get_elements(self, node):
     for e in node.findall('%selements/%selem' % (self.xmlns, self.xmlns)):
@@ -80,13 +86,13 @@ class UnimodDatabase:
     lre = re.compile(search)
     for k in self.modifications.keys():
       l = lre.search(k)
-      if l != None:
+      if l is not None:
         labels.append(k)
     return labels
 
   def get_neutral_loss(self, label, site):
     mod = self.modifications.get(label, None)
-    if mod != None:
+    if mod is not None:
       try:
         nl = []
         for n in mod['sites'][site]['NeutralLoss']:
@@ -99,7 +105,7 @@ class UnimodDatabase:
 
   def get_delta_mono(self, label):
     mod = self.modifications.get(label, None)
-    if mod != None:
+    if mod is not None:
       try:
         val = float(mod['delta_mono_mass'])
         return val
