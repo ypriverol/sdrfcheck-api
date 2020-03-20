@@ -19,6 +19,25 @@ schemes:
 - "https"
 - "http"
 paths:
+  /properties/getTemplates:
+    get:
+      tags:
+      - "properties"
+      summary: "Get the templates for Sample metadata and Data files"
+      operationId: "get_templates"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Template"
+        "400":
+          description: "Invalid schema value"
+      x-swagger-router-controller: "swagger_server.controllers.properties_controller"
   /properties/findSampleProperties:
     get:
       tags:
@@ -267,6 +286,93 @@ definitions:
         id: "NCBITaxon:9606"
         ontology: "NCBITAXON"
       monoisotopicMass: 42.0105649999999997135091689415276050567626953125
+  TemplateColumn:
+    type: "object"
+    required:
+    - "name"
+    - "ontologyTerm"
+    - "typeNode"
+    properties:
+      name:
+        type: "string"
+        description: "Name of the column"
+      typeNode:
+        type: "string"
+        example: "characteristics"
+        description: "Type of the column"
+      ontologyTerm:
+        $ref: "#/definitions/OntologyTerm"
+    example:
+      typeNode: "characteristics"
+      name: "name"
+      ontologyTerm:
+        schema:
+        - "HUMAN"
+        - "VERTEBRATES"
+        - "NON-VERTEBRATES"
+        - "PLANTS"
+        - "CELL LINES"
+        - "DEFAULT"
+        name: "Homo sapiens"
+        definition: "Definition of the the ontology term"
+        id: "NCBITaxon:9606"
+        ontology: "NCBITAXON"
+  Template:
+    type: "object"
+    required:
+    - "name"
+    - "typeTemplate"
+    properties:
+      name:
+        type: "string"
+        example: "HUMAN"
+        description: "Name of the template"
+      typeTemplate:
+        type: "string"
+        description: "Type of the Template Sample or Data template"
+        enum:
+        - "Data"
+        - "Sample"
+      descriptiopn:
+        type: "string"
+        description: "Description of the template"
+      columns:
+        type: "array"
+        items:
+          $ref: "#/definitions/TemplateColumn"
+    example:
+      columns:
+      - typeNode: "characteristics"
+        name: "name"
+        ontologyTerm:
+          schema:
+          - "HUMAN"
+          - "VERTEBRATES"
+          - "NON-VERTEBRATES"
+          - "PLANTS"
+          - "CELL LINES"
+          - "DEFAULT"
+          name: "Homo sapiens"
+          definition: "Definition of the the ontology term"
+          id: "NCBITaxon:9606"
+          ontology: "NCBITAXON"
+      - typeNode: "characteristics"
+        name: "name"
+        ontologyTerm:
+          schema:
+          - "HUMAN"
+          - "VERTEBRATES"
+          - "NON-VERTEBRATES"
+          - "PLANTS"
+          - "CELL LINES"
+          - "DEFAULT"
+          name: "Homo sapiens"
+          definition: "Definition of the the ontology term"
+          id: "NCBITaxon:9606"
+          ontology: "NCBITAXON"
+      name: "HUMAN"
+      typeTemplate: "Data"
+      descriptiopn: "descriptiopn"
   ApiResponse:
     type: "object"
     properties:

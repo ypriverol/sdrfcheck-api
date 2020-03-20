@@ -6,3 +6,4 @@ from __future__ import absolute_import
 from swagger_server.models.api_response import ApiResponse
 from swagger_server.models.ontology_term import OntologyTerm
 from swagger_server.models.post_translational_modification import PostTranslationalModification
+from swagger_server.models.template import Template

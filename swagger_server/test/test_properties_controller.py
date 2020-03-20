@@ -7,6 +7,7 @@ from six import BytesIO
 
 from swagger_server.models.ontology_term import OntologyTerm  # noqa: E501
 from swagger_server.models.post_translational_modification import PostTranslationalModification  # noqa: E501
+from swagger_server.models.template import Template  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 
@@ -59,7 +60,7 @@ class TestPropertiesController(BaseTestCase):
 
         Find values for an specific property, for example possible taxonomy values for Organism property
         """
-        query_string = [('accesssion', 'accesssion_example'),
+        query_string = [('accession', 'accession_example'),
                         ('ontology', 'ontology_example'),
                         ('filter', 'filter_example'),
                         ('page', 0),
@@ -68,6 +69,17 @@ class TestPropertiesController(BaseTestCase):
             '/v2/properties/findValuesByProperty',
             method='GET',
             query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_get_templates(self):
+        """Test case for get_templates
+
+        Get the templates for Sample metadata and Data files
+        """
+        response = self.client.open(
+            '/v2/properties/getTemplates',
+            method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
