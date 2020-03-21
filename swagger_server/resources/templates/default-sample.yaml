@@ -1,22 +1,27 @@
 template:
-  name: Default Mass Spectrometry Template
-  type: Data
+  name: Default Sample Metadata
+  type: Sample
   description: The default sample metadata template for any type of omics submission
   columns:
-    assay name:
+    source name:
       type: None
-    fraction identifier:
-      type: comment
-      ontology_accession: "MS:1000858"
-      ontology: MS
-      ols_uri: http://purl.obolibrary.org/obo/MS_1000858
-    label:
-      type: comment
-      ontology_accession: "PRIDE:0000514"
-      ontology: PRIDE
-      ols_uri: http://www.ebi.ac.uk/pride/PRIDE_0000514
-    data file:
-      type: comment
-      ontology_accession: "EFO:0004095"
+    organism:
+      type: characteristics
+      ontology_accession: "OBI:0100026"
       ontology: EFO
-      ols_uri: http://www.ebi.ac.uk/efo/EFO_0004095
+      ols_uri: http://purl.obolibrary.org/obo/OBI_0100026
+    organism part:
+      type: characteristics
+      ontology_accession: "EFO:0000635"
+      ontology: EFO
+      ols_uri: http://www.ebi.ac.uk/efo/EFO_0000635
+    cell type:
+      type: characteristics
+      ontology_accession: "EFO:0000324"
+      ontology: EFO
+      ols_uri: http://www.ebi.ac.uk/efo/EFO_0000324
+    disease:
+      type: characteristics
+      ontology_accession: "EFO:0000408"
+      ontology: EFO
+      ols_uri: http://www.ebi.ac.uk/efo/EFO_0000408
