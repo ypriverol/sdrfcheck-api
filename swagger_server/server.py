@@ -5,7 +5,7 @@ from flask_cors import CORS
 
 #
 # _PUBLIC_REGISTRY_URL = "http://biocontainers.pro/registry/"
-import encoder
+from swagger_server.encoder import JSONEncoder
 
 
 def print_help(ctx, param, value):
@@ -22,7 +22,7 @@ def print_help(ctx, param, value):
 def main(ctx,):
     app = connexion.App(__name__, specification_dir='./swagger/')
     CORS(app.app, expose_headers='next_page, last_page, self_link, current_offset, current_limit')  # adds CORS support
-    app.app.json_encoder = encoder.JSONEncoder
+    app.app.json_encoder = JSONEncoder
     app.add_api('swagger.yaml', arguments={'title': 'SDRF Restful API'})
     app.run(port=8090)
 
