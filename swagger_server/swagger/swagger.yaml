@@ -11,7 +11,7 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "localhost:8090"
-basePath: "/v2"
+basePath: "/pride/sdrfcheck-api/v2"
 tags:
 - name: "properties"
   description: "Annotation of specific SDRF columns"

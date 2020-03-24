@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sdrfcheck-api
+  labels:
+    app: sdrfcheck-api
+spec:
+  replicas: $replicas
+  selector:
+    matchLabels:
+      app: sdrfcheck-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: sdrfcheck-api
+    spec:
+      imagePullSecrets:
+        - name: $DOCKER_PULL_SECRET
+      containers:
+        - name: sdrfcheck-api
+          image: $IMAGE
+          env:
+            - name: HTTP_PROXY
+              value: "http://$http_proxy_host:$http_proxy_port"
+            - name: HTTPS_PROXY
+              value: "http://$http_proxy_host:$http_proxy_port"
+            - name: http_proxy
+              value: "http://$http_proxy_host:$http_proxy_port"
+            - name: https_proxy
+              value: "http://$http_proxy_host:$http_proxy_port"
+          ports:
+            - containerPort: $port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sdrfcheck-api
+spec:
+  selector:
+    app: sdrfcheck-api
+  ports:
+    - protocol: TCP
+      port: $port
+      targetPort: $port
+  type: NodePort

@@ -1,8 +1,11 @@
+click
+connexion[swagger-ui]
 celery
 flask
 redis
 requests==2.20.0
 flask-swagger-ui>=3.6.0
 flask_restful
+flask-cors
 boto3
 PyYAML>=3.12
