@@ -1,7 +1,7 @@
 import re
 import xml.etree.ElementTree as et
 
-from models.ptm_site import PTMSite
+from swagger_server.models.ptm_site import PTMSite
 from swagger_server.models.post_translational_modification import PostTranslationalModification  # noqa: E501
 from swagger_server.models.ontology_term import OntologyTerm
 
