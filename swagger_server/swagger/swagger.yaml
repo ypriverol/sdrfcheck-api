@@ -38,6 +38,33 @@ paths:
         "400":
           description: "Invalid schema value"
       x-swagger-router-controller: "swagger_server.controllers.properties_controller"
+  /properties/getPropertiesFromText:
+    get:
+      tags:
+      - "properties"
+      summary: "Get the templates for Sample metadata and Data files"
+      operationId: "get_properties_from_text"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "sdrf_properties"
+        in: "query"
+        description: "A List of properties from SDRF in plain text"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/MapTemplateColumn"
+        "400":
+          description: "Invalid schema value"
+      x-swagger-router-controller: "swagger_server.controllers.properties_controller"
   /properties/findSampleProperties:
     get:
       tags:
@@ -317,6 +344,16 @@ definitions:
         definition: "Definition of the the ontology term"
         id: "NCBITaxon:9606"
         ontology: "NCBITAXON"
+  MapTemplateColumn:
+    type: "object"
+    required:
+    - "freeTextColumn"
+    properties:
+      freeTextColumn:
+        type: "string"
+        description: "characteristics[organism]"
+      templateColumn:
+        $ref: "#/definitions/TemplateColumn"
   Template:
     type: "object"
     required:

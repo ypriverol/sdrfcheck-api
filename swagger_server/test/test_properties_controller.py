@@ -5,9 +5,11 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
+from swagger_server.models.map_template_column import MapTemplateColumn  # noqa: E501
 from swagger_server.models.ontology_term import OntologyTerm  # noqa: E501
 from swagger_server.models.post_translational_modification import PostTranslationalModification  # noqa: E501
 from swagger_server.models.template import Template  # noqa: E501
+from swagger_server.models.template_column import TemplateColumn  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 
@@ -67,6 +69,19 @@ class TestPropertiesController(BaseTestCase):
                         ('pageSize', 100)]
         response = self.client.open(
             '/v2/properties/findValuesByProperty',
+            method='GET',
+            query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_get_properties_from_text(self):
+        """Test case for get_properties_from_text
+
+        Get the templates for Sample metadata and Data files
+        """
+        query_string = [('sdrfProperties', 'sdrfProperties_example')]
+        response = self.client.open(
+            '/v2/properties/getPropertiesFromText',
             method='GET',
             query_string=query_string)
         self.assert200(response,
