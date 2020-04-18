@@ -1,4 +1,5 @@
 import os
+import pathlib
 from collections import defaultdict
 
 import connexion
@@ -96,7 +97,7 @@ def get_properties_from_text(sdrf_properties):  # noqa: E501
   """
   print(sdrf_properties)
 
-  relevant_path = "resources/templates/"
+  relevant_path = str(pathlib.Path(__file__).parent) + "/" + "../resources/templates/"
   included_extensions = ['yaml']
   file_names = [fn for fn in os.listdir(relevant_path)
                 if any(fn.endswith(ext) for ext in included_extensions)]
@@ -114,7 +115,7 @@ def get_properties_from_text(sdrf_properties):  # noqa: E501
         ontology_term = None
         columns[yaml_column] = ontology
 
-  relevant_path = "resources/terms/"
+  relevant_path = str(pathlib.Path(__file__).parent) + "/" + "../resources/terms/"
   included_extensions = ['yaml']
   file_names = [fn for fn in os.listdir(relevant_path)
                 if any(fn.endswith(ext) for ext in included_extensions)]
