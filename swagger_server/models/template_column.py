@@ -5,6 +5,7 @@ from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
+from swagger_server.models.link import Link
 from swagger_server.models.base_model_ import Model
 from swagger_server import util
 from swagger_server.models.ontology_term import OntologyTerm
@@ -15,7 +16,7 @@ class TemplateColumn(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, name: str=None, type_node: str=None, ontology_term: OntologyTerm=None, other_search_term: List[OntologyTerm]=None):  # noqa: E501
+    def __init__(self, name: str=None, type_node: str=None, ontology_term: OntologyTerm=None, other_search_term: List[OntologyTerm]=None, links: List[Link]=None):  # noqa: E501
         """TemplateColumn - a model defined in Swagger
 
         :param name: The name of this TemplateColumn.  # noqa: E501
@@ -26,25 +27,30 @@ class TemplateColumn(Model):
         :type ontology_term: OntologyTerm
         :param other_search_term: The other_search_term of this TemplateColumn.  # noqa: E501
         :type other_search_term: List[OntologyTerm]
+        :param links: The links of this TemplateColumn.  # noqa: E501
+        :type links: List[Link]
         """
         self.swagger_types = {
             'name': str,
             'type_node': str,
             'ontology_term': OntologyTerm,
-            'other_search_term': List[OntologyTerm]
+            'other_search_term': List[OntologyTerm],
+            'links': List[Link]
         }
 
         self.attribute_map = {
             'name': 'name',
             'type_node': 'typeNode',
             'ontology_term': 'ontologyTerm',
-            'other_search_term': 'otherSearchTerm'
+            'other_search_term': 'otherSearchTerm',
+            'links': 'links'
         }
 
         self._name = name
         self._type_node = type_node
         self._ontology_term = ontology_term
         self._other_search_term = other_search_term
+        self._links = links
 
     @classmethod
     def from_dict(cls, dikt) -> 'TemplateColumn':
@@ -150,3 +156,24 @@ class TemplateColumn(Model):
         """
 
         self._other_search_term = other_search_term
+
+    @property
+    def links(self) -> List[Link]:
+        """Gets the links of this TemplateColumn.
+
+
+        :return: The links of this TemplateColumn.
+        :rtype: List[Link]
+        """
+        return self._links
+
+    @links.setter
+    def links(self, links: List[Link]):
+        """Sets the links of this TemplateColumn.
+
+
+        :param links: The links of this TemplateColumn.
+        :type links: List[Link]
+        """
+
+        self._links = links

@@ -84,7 +84,6 @@ def find_values_by_property(accession, ontology, filter=None, page=None, pageSiz
   return 'do some magic!'
 
 
-
 def get_properties_from_text(sdrf_properties):  # noqa: E501
   """Get the templates for Sample metadata and Data files
 
@@ -119,7 +118,7 @@ def get_properties_from_text(sdrf_properties):  # noqa: E501
     for ontology_text in sdrf_properties:
       text_key = get_ontology_text_from_columnname(ontology_text)
       if compare_string(text_key, yaml_column):
-        ontology  = columns[yaml_column]
+        ontology = columns[yaml_column]
         accession = ontology['ontology_accession']
         cv = ontology['ontology']
         ontology_term = OntologyTerm(accession, yaml_column, cv, None, None)

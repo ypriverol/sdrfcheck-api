@@ -313,6 +313,16 @@ definitions:
         id: "NCBITaxon:9606"
         ontology: "NCBITAXON"
       monoisotopicMass: 42.010565
+  Link:
+    type: "object"
+    required:
+    - "name"
+    - "uri"
+    properties:
+      name:
+        type: "string"
+      uri:
+        type: "string"
   TemplateColumn:
     type: "object"
     required:
@@ -333,6 +343,10 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/OntologyTerm"
+      links:
+        type: "array"
+        items:
+          $ref: "#/definitions/Link"
     example:
       typeNode: "characteristics"
       name: "name"
