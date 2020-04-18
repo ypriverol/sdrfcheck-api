@@ -10,11 +10,15 @@ from models.ontology_term import OntologyTerm  # noqa: E501
 from models.post_translational_modification import PostTranslationalModification  # noqa: E501
 from models.template import Template  # noqa: E501
 from models.template_column import TemplateColumn  # noqa: E501
+from swagger_server.models.ontology_term import OntologyTerm
+
 from swagger_server import util
 from unimod.unimod import UnimodDatabase
 import yaml
 
 from util import get_ontology_text_from_columnname, compare_string
+
+from swagger_server.ols import OlsClient
 
 
 def find_data_properties(template=None):  # noqa: E501
@@ -65,24 +69,33 @@ def find_sample_properties(template=None):  # noqa: E501
 
 
 def find_values_by_property(accession, ontology, filter=None, page=None, pageSize=None):  # noqa: E501
-  """Find values for an specific property, for example possible taxonomy values for Organism property
+  """
+  Find values for an specific property, for example possible taxonomy values for Organism property
 
-     # noqa: E501
+  # noqa: E501
 
-    :param accession: Accession of the property in the Ontology
-    :type accession: str
-    :param ontology: Ontology to loockup the property
-    :type ontology: str
-    :param filter: Keyword to filter the list of possible values
-    :type filter: str
-    :param page: Number of the page with the possible values for the property
-    :type page: int
-    :param pageSize: Number of values with the possible values for the property
-    :type pageSize: int
+  :param accession: Accession of the property in the Ontology
+  :type accession: str
+  :param ontology: Ontology to loockup the property
+  :type ontology: str
+  :param filter: Keyword to filter the list of possible values
+  :type filter: str
+  :param page: Number of the page with the possible values for the property
+  :type page: int
+  :param pageSize: Number of values with the possible values for the property
+  :type pageSize: int
 
-    :rtype: List[OntologyTerm]
-    """
-  return 'do some magic!'
+  :rtype: List[OntologyTerm]
+  """
+  client = OlsClient()
+  results = client.search(filter, ontology=ontology, childrenOf=[accession])
+  terms = []
+  if results is not None and len(results) > 0:
+    for old_term in results:
+      ontologyTerm = OntologyTerm(id = old_term['obo_id'], name = old_term['label'], ontology = old_term['ontology_prefix'])
+      terms.append(ontologyTerm)
+  terms = terms[(page * pageSize):(page * pageSize) + pageSize]
+  return terms
 
 
 def get_properties_from_text(sdrf_properties):  # noqa: E501
@@ -153,7 +166,7 @@ def get_templates():  # noqa: E501
 
     :rtype: List[Template]
     """
-  relevant_path = "resources/templates/"
+  relevant_path = str(pathlib.Path(__file__).parent) + "/" + "../resources/templates/"
   included_extensions = ['yaml']
   file_names = [fn for fn in os.listdir(relevant_path)
                 if any(fn.endswith(ext) for ext in included_extensions)]
