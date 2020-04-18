@@ -15,7 +15,7 @@ class TemplateColumn(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, name: str=None, type_node: str=None, ontology_term: OntologyTerm=None):  # noqa: E501
+    def __init__(self, name: str=None, type_node: str=None, ontology_term: OntologyTerm=None, other_search_term: List[OntologyTerm]=None):  # noqa: E501
         """TemplateColumn - a model defined in Swagger
 
         :param name: The name of this TemplateColumn.  # noqa: E501
@@ -24,22 +24,27 @@ class TemplateColumn(Model):
         :type type_node: str
         :param ontology_term: The ontology_term of this TemplateColumn.  # noqa: E501
         :type ontology_term: OntologyTerm
+        :param other_search_term: The other_search_term of this TemplateColumn.  # noqa: E501
+        :type other_search_term: List[OntologyTerm]
         """
         self.swagger_types = {
             'name': str,
             'type_node': str,
-            'ontology_term': OntologyTerm
+            'ontology_term': OntologyTerm,
+            'other_search_term': List[OntologyTerm]
         }
 
         self.attribute_map = {
             'name': 'name',
             'type_node': 'typeNode',
-            'ontology_term': 'ontologyTerm'
+            'ontology_term': 'ontologyTerm',
+            'other_search_term': 'otherSearchTerm'
         }
 
         self._name = name
         self._type_node = type_node
         self._ontology_term = ontology_term
+        self._other_search_term = other_search_term
 
     @classmethod
     def from_dict(cls, dikt) -> 'TemplateColumn':
@@ -124,3 +129,24 @@ class TemplateColumn(Model):
             raise ValueError("Invalid value for `ontology_term`, must not be `None`")  # noqa: E501
 
         self._ontology_term = ontology_term
+
+    @property
+    def other_search_term(self) -> List[OntologyTerm]:
+        """Gets the other_search_term of this TemplateColumn.
+
+
+        :return: The other_search_term of this TemplateColumn.
+        :rtype: List[OntologyTerm]
+        """
+        return self._other_search_term
+
+    @other_search_term.setter
+    def other_search_term(self, other_search_term: List[OntologyTerm]):
+        """Sets the other_search_term of this TemplateColumn.
+
+
+        :param other_search_term: The other_search_term of this TemplateColumn.
+        :type other_search_term: List[OntologyTerm]
+        """
+
+        self._other_search_term = other_search_term

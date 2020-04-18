@@ -1,0 +1,7 @@
+terms:
+  bait:
+    type: characteristics
+    ontology_accession: "OBI:0100026"
+    ontology: MI
+    ols_uri: http://purl.obolibrary.org/obo/MI_0496
+

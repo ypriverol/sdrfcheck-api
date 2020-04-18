@@ -290,7 +290,7 @@ definitions:
           $ref: "#/definitions/PTMSite"
       monoisotopicMass:
         type: "number"
-        example: 42.0105649999999997135091689415276050567626953125
+        example: 42.010565
         description: "The exact atomic mass shift produced by the modification. Please\
           \ use at least 5 decimal places of accuracy."
     example:
@@ -312,7 +312,7 @@ definitions:
         definition: "Definition of the the ontology term"
         id: "NCBITaxon:9606"
         ontology: "NCBITAXON"
-      monoisotopicMass: 42.0105649999999997135091689415276050567626953125
+      monoisotopicMass: 42.010565
   TemplateColumn:
     type: "object"
     required:
@@ -329,6 +329,10 @@ definitions:
         description: "Type of the column"
       ontologyTerm:
         $ref: "#/definitions/OntologyTerm"
+      otherSearchTerm:
+        type: "array"
+        items:
+          $ref: "#/definitions/OntologyTerm"
     example:
       typeNode: "characteristics"
       name: "name"
