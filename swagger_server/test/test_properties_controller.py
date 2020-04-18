@@ -5,12 +5,12 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
-from swagger_server.models.map_template_column import MapTemplateColumn  # noqa: E501
-from swagger_server.models.ontology_term import OntologyTerm  # noqa: E501
-from swagger_server.models.post_translational_modification import PostTranslationalModification  # noqa: E501
-from swagger_server.models.template import Template  # noqa: E501
-from swagger_server.models.template_column import TemplateColumn  # noqa: E501
-from swagger_server.test import BaseTestCase
+from models.map_template_column import MapTemplateColumn  # noqa: E501
+from models.ontology_term import OntologyTerm  # noqa: E501
+from models.post_translational_modification import PostTranslationalModification  # noqa: E501
+from models.template import Template  # noqa: E501
+from models.template_column import TemplateColumn  # noqa: E501
+from test import BaseTestCase
 
 
 class TestPropertiesController(BaseTestCase):

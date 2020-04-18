@@ -11,4 +11,6 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 COPY . /usr/src/app
 RUN python setup.py install
 
+ENV PYTHONPATH ./swagger_server
+
 CMD ["python3", "-m", "swagger_server.server"]

@@ -5,7 +5,7 @@ from flask_cors import CORS
 
 #
 # _PUBLIC_REGISTRY_URL = "http://biocontainers.pro/registry/"
-from swagger_server.encoder import JSONEncoder
+from encoder import JSONEncoder
 
 
 def print_help(ctx, param, value):

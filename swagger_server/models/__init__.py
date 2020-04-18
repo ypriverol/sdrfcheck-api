@@ -3,11 +3,11 @@
 # flake8: noqa
 from __future__ import absolute_import
 # import models into model package
-from swagger_server.models.api_response import ApiResponse
-from swagger_server.models.link import Link
-from swagger_server.models.map_template_column import MapTemplateColumn
-from swagger_server.models.ontology_term import OntologyTerm
-from swagger_server.models.ptm_site import PTMSite
-from swagger_server.models.post_translational_modification import PostTranslationalModification
-from swagger_server.models.template import Template
-from swagger_server.models.template_column import TemplateColumn
+from models.api_response import ApiResponse
+from models.link import Link
+from models.map_template_column import MapTemplateColumn
+from models.ontology_term import OntologyTerm
+from models.ptm_site import PTMSite
+from models.post_translational_modification import PostTranslationalModification
+from models.template import Template
+from models.template_column import TemplateColumn
