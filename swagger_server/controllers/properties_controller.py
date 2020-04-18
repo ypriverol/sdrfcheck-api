@@ -114,6 +114,23 @@ def get_properties_from_text(sdrf_properties):  # noqa: E501
         ontology_term = None
         columns[yaml_column] = ontology
 
+  relevant_path = "resources/terms/"
+  included_extensions = ['yaml']
+  file_names = [fn for fn in os.listdir(relevant_path)
+                if any(fn.endswith(ext) for ext in included_extensions)]
+
+  for file_name in file_names:
+    with open(relevant_path + os.sep + file_name) as file:
+      # The FullLoader parameter handles the conversion from YAML
+      # scalar values to Python the dictionary format
+      yaml_file = yaml.load(file, Loader=yaml.FullLoader)
+      for yaml_column in yaml_file['terms']:
+        name = yaml_column
+        ontology = yaml_file['terms'][yaml_column]
+        type = ontology['type']
+        ontology_term = None
+        columns[yaml_column] = ontology
+
   for yaml_column in columns:
     for ontology_text in sdrf_properties:
       text_key = get_ontology_text_from_columnname(ontology_text)
