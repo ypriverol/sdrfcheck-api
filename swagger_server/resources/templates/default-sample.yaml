@@ -5,23 +5,28 @@ template:
   columns:
     source name:
       type: None
+      searchable: false
     organism:
       type: characteristics
       ontology_accession: "OBI:0100026"
       ontology: EFO
       ols_uri: http://purl.obolibrary.org/obo/OBI_0100026
+      searchable: true
     organism part:
       type: characteristics
       ontology_accession: "EFO:0000635"
       ontology: EFO
       ols_uri: http://www.ebi.ac.uk/efo/EFO_0000635
+      searchable: true
     cell type:
       type: characteristics
       ontology_accession: "EFO:0000324"
       ontology: EFO
       ols_uri: http://www.ebi.ac.uk/efo/EFO_0000324
+      searchable: true
     disease:
       type: characteristics
       ontology_accession: "EFO:0000408"
       ontology: EFO
       ols_uri: http://www.ebi.ac.uk/efo/EFO_0000408
+      searchable: true

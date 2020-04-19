@@ -4,14 +4,17 @@ terms:
     ontology_accession: "OBI:0100026"
     ontology: MI
     ols_uri: http://purl.obolibrary.org/obo/MI_0496
+    searchable: false
   concentration of:
     type: characteristics
     ontology_accession: "PATO:0000033"
     ontology: PATO
     ols_uri: http://purl.obolibrary.org/obo/PATO_0000033
+    searchable: false
   protein_coding_gene:
     type: characteristics
     ontology_accession: "SO:0001217"
     ontology: SO
     ols_uri:  http://purl.obolibrary.org/obo/SO_0001217
+    searchable: false
 

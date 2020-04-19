@@ -16,7 +16,7 @@ class TemplateColumn(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, name: str=None, type_node: str=None, ontology_term: OntologyTerm=None, other_search_term: List[OntologyTerm]=None, links: List[Link]=None):  # noqa: E501
+    def __init__(self, name: str=None, type_node: str=None, ontology_term: OntologyTerm=None, searchable: bool=True, other_search_term: List[OntologyTerm]=None, links: List[Link]=None):  # noqa: E501
         """TemplateColumn - a model defined in Swagger
 
         :param name: The name of this TemplateColumn.  # noqa: E501
@@ -25,6 +25,8 @@ class TemplateColumn(Model):
         :type type_node: str
         :param ontology_term: The ontology_term of this TemplateColumn.  # noqa: E501
         :type ontology_term: OntologyTerm
+        :param searchable: The searchable of this TemplateColumn.  # noqa: E501
+        :type searchable: bool
         :param other_search_term: The other_search_term of this TemplateColumn.  # noqa: E501
         :type other_search_term: List[OntologyTerm]
         :param links: The links of this TemplateColumn.  # noqa: E501
@@ -34,6 +36,7 @@ class TemplateColumn(Model):
             'name': str,
             'type_node': str,
             'ontology_term': OntologyTerm,
+            'searchable': bool,
             'other_search_term': List[OntologyTerm],
             'links': List[Link]
         }
@@ -42,6 +45,7 @@ class TemplateColumn(Model):
             'name': 'name',
             'type_node': 'typeNode',
             'ontology_term': 'ontologyTerm',
+            'searchable': 'searchable',
             'other_search_term': 'otherSearchTerm',
             'links': 'links'
         }
@@ -49,6 +53,7 @@ class TemplateColumn(Model):
         self._name = name
         self._type_node = type_node
         self._ontology_term = ontology_term
+        self._searchable = searchable
         self._other_search_term = other_search_term
         self._links = links
 
@@ -135,6 +140,27 @@ class TemplateColumn(Model):
             raise ValueError("Invalid value for `ontology_term`, must not be `None`")  # noqa: E501
 
         self._ontology_term = ontology_term
+
+    @property
+    def searchable(self) -> bool:
+        """Gets the searchable of this TemplateColumn.
+
+
+        :return: The searchable of this TemplateColumn.
+        :rtype: bool
+        """
+        return self._searchable
+
+    @searchable.setter
+    def searchable(self, searchable: bool):
+        """Sets the searchable of this TemplateColumn.
+
+
+        :param searchable: The searchable of this TemplateColumn.
+        :type searchable: bool
+        """
+
+        self._searchable = searchable
 
     @property
     def other_search_term(self) -> List[OntologyTerm]:

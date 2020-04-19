@@ -5,49 +5,59 @@ template:
   columns:
     source name:
       type: None
+      searchable: false
     organism:
       type: characteristics
       ontology_accession: "OBI:0100026"
       ontology: EFO
       ols_uri: http://purl.obolibrary.org/obo/OBI_0100026
+      searchable: true
     organism part:
       type: characteristics
       ontology_accession: "EFO:0000635"
       ontology: EFO
       ols_uri: http://www.ebi.ac.uk/efo/EFO_0000635
+      searchable: true
     cell type:
       type: characteristics
       ontology_accession: "EFO:0000324"
       ontology: EFO
       ols_uri: http://www.ebi.ac.uk/efo/EFO_0000324
+      searchable: true
     disease:
       type: characteristics
       ontology_accession: "EFO:0000408"
       ontology: EFO
       ols_uri: http://www.ebi.ac.uk/efo/EFO_0000408
+      searchable: true
     ethnic group:
       type: characteristics
       ontology_accession: "EFO:0001799"
       ontology: EFO
       ols_uri: http://www.ebi.ac.uk/efo/EFO_0001799
+      searchable: true
     age:
       type: characteristics
       ontology_accession: "EFO:0000246"
       ontology: EFO
       ols_uri: http://www.ebi.ac.uk/efo/EFO_0000246
+      searchable: false
     sex:
       type: characteristics
       ontology_accession: "PATO:0000047"
       ontology: EFO
       ols_uri: http://purl.obolibrary.org/obo/PATO_0000047
+      searchable: true
     developmental stage:
       type: characteristics
       ontology_accession: "EFO:0000399"
       ontology: EFO
       ols_uri: http://www.ebi.ac.uk/efo/EFO_0000399
+      searchable: true
     individual:
       type: characteristics
       ontology_accession: "EFO:0000542"
       ontology: EFO
       ols_uri: http://www.ebi.ac.uk/efo/EFO_0000542
+      searchable: false
 

@@ -99,16 +99,14 @@ def find_values_by_property(accession, ontology, filter=None, page=None, pageSiz
 
 
 def get_properties_from_text(sdrf_properties):  # noqa: E501
-  """Get the templates for Sample metadata and Data files
-
-   # noqa: E501
+  """
+  Get the templates for Sample metadata and Data files
+  # noqa: E501
 
   :param sdrf_properties: A List of properties from SDRF in plain text
   :type sdrf_properties: List[str]
-
   :rtype: List[TemplateColumn]
   """
-  print(sdrf_properties)
 
   relevant_path = str(pathlib.Path(__file__).parent) + "/" + "../resources/templates/"
   included_extensions = ['yaml']
@@ -153,19 +151,18 @@ def get_properties_from_text(sdrf_properties):  # noqa: E501
         accession = ontology['ontology_accession']
         cv = ontology['ontology']
         ontology_term = OntologyTerm(id = accession, name = yaml_column, ontology = cv, iri_id=ontology['ols_uri'])
-        column = TemplateColumn(yaml_column, type, ontology_term)
+        column = TemplateColumn(name = yaml_column, type_node=type, ontology_term = ontology_term, searchable=ontology['searchable'])
         map_columns.append(MapTemplateColumn(ontology_text, column))
   return map_columns
 
 
 def get_templates():  # noqa: E501
-  """Get the templates for Sample metadata and Data files
+  """
+  Get the templates for Sample metadata and Data files
+  # noqa: E501
+  :rtype: List[Template]
+  """
 
-     # noqa: E501
-
-
-    :rtype: List[Template]
-    """
   relevant_path = str(pathlib.Path(__file__).parent) + "/" + "../resources/templates/"
   included_extensions = ['yaml']
   file_names = [fn for fn in os.listdir(relevant_path)
@@ -186,7 +183,7 @@ def get_templates():  # noqa: E501
           accession = ontology['ontology_accession']
           cv = ontology['ontology']
           ontology_term = OntologyTerm(id = accession, name = name, ontology = cv, iri_id=ontology['ols_uri'])
-        column = TemplateColumn(name, type, ontology_term)
+        column = TemplateColumn(name = name, type_node=type, ontology_term = ontology_term, searchable = ontology['searchable'])
         columns.append(column)
       template = Template(yaml_file['template']['name'], yaml_file['template']['type'],
                           yaml_file['template']['description'], columns)
