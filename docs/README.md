@@ -81,3 +81,41 @@ The results object list:
 
 The result is a list of Ontology Terms.
 
+### GET /complexproperties/findPostTranslationalModifications
+
+The `findPostTranslationalModifications` allows to search for post-translation in UNIMOD:
+
+The user should provide a keyword (e.g pyroglutamic)for search into the database like:
+
+```json
+GET /complexproperties/findPostTranslationalModifications?filter=pyroglutamic&pageSize=100
+```
+This will returns all the post-translational modifications that contains the word `pyroglutamic` in the name, description.
+
+```json
+[
+  {
+    "chemicalFormula": "H(-2) O",
+    "monoisotopicMass": "13.979265",
+    "ontologyTerm": {
+      "definition": "proline oxidation to pyroglutamic acid",
+      "id": "UNIMOD:359",
+      "name": "Pro->pyro-Glu",
+      "ontology": "UNIMOD"
+    },
+    "sites": [
+      {
+        "position": "Anywhere",
+        "site": "P"
+      }
+    ]
+  }
+]
+```
+A post-translation modification contains the following attributes:
+
+- chemicalFormula: "H(-2) O",
+- "monoisotopicMass": "13.979265",
+- Ontology term
+- List of sites: ("position": "Anywhere", "site": "P")
+
