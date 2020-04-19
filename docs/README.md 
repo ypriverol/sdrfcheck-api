@@ -1,0 +1,3 @@
+## SDRF Restful API
+
+The SDRF RestFul  API allows to annotate datasets in [SDRF file format](https://github.com/bigbio/proteomics-metadata-standard/). Here, we presented the documentation of the API including all the endpoints and data structure.
