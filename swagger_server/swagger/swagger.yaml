@@ -140,7 +140,7 @@ paths:
       - name: "ontology"
         in: "query"
         description: "Ontology to loockup the property"
-        required: true
+        required: false
         type: "string"
       - name: "filter"
         in: "query"
@@ -230,6 +230,9 @@ definitions:
         type: "string"
         example: "Definition of the the ontology term"
         description: "A general defintion of the Ontology term"
+      iri_id:
+        type: "string"
+        example: "http://purl.obolibrary.org/obo/NCBITaxon_9606"
       schema:
         type: "array"
         example:

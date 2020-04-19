@@ -15,7 +15,7 @@ class OntologyTerm(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id: str=None, name: str=None, ontology: str=None, definition: str=None, schema: List[object]=None):  # noqa: E501
+    def __init__(self, id: str=None, name: str=None, ontology: str=None, definition: str=None, iri_id: str=None, schema: List[object]=None):  # noqa: E501
         """OntologyTerm - a model defined in Swagger
 
         :param id: The id of this OntologyTerm.  # noqa: E501
@@ -26,6 +26,8 @@ class OntologyTerm(Model):
         :type ontology: str
         :param definition: The definition of this OntologyTerm.  # noqa: E501
         :type definition: str
+        :param iri_id: The iri_id of this OntologyTerm.  # noqa: E501
+        :type iri_id: str
         :param schema: The schema of this OntologyTerm.  # noqa: E501
         :type schema: List[object]
         """
@@ -34,6 +36,7 @@ class OntologyTerm(Model):
             'name': str,
             'ontology': str,
             'definition': str,
+            'iri_id': str,
             'schema': List[object]
         }
 
@@ -42,6 +45,7 @@ class OntologyTerm(Model):
             'name': 'name',
             'ontology': 'ontology',
             'definition': 'definition',
+            'iri_id': 'iri_id',
             'schema': 'schema'
         }
 
@@ -49,6 +53,7 @@ class OntologyTerm(Model):
         self._name = name
         self._ontology = ontology
         self._definition = definition
+        self._iri_id = iri_id
         self._schema = schema
 
     @classmethod
@@ -159,6 +164,27 @@ class OntologyTerm(Model):
         """
 
         self._definition = definition
+
+    @property
+    def iri_id(self) -> str:
+        """Gets the iri_id of this OntologyTerm.
+
+
+        :return: The iri_id of this OntologyTerm.
+        :rtype: str
+        """
+        return self._iri_id
+
+    @iri_id.setter
+    def iri_id(self, iri_id: str):
+        """Sets the iri_id of this OntologyTerm.
+
+
+        :param iri_id: The iri_id of this OntologyTerm.
+        :type iri_id: str
+        """
+
+        self._iri_id = iri_id
 
     @property
     def schema(self) -> List[object]:

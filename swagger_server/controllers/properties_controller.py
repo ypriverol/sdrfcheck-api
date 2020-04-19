@@ -54,7 +54,6 @@ def find_post_translational_modifications(filter=None, page=0, pageSize=100):  #
   list_found = l[(page * pageSize):(page * pageSize) + pageSize]
   return list_found
 
-
 def find_sample_properties(template=None):  # noqa: E501
   """Find properties for rows of the SDRF samples
 
@@ -92,7 +91,8 @@ def find_values_by_property(accession, ontology, filter=None, page=None, pageSiz
   terms = []
   if results is not None and len(results) > 0:
     for old_term in results:
-      ontologyTerm = OntologyTerm(id = old_term['obo_id'], name = old_term['label'], ontology = old_term['ontology_prefix'])
+      ontologyTerm = OntologyTerm(id = old_term['obo_id'], name = old_term['label'],
+                                  ontology = old_term['ontology_prefix'], iri_id=old_term['iri'])
       terms.append(ontologyTerm)
   terms = terms[(page * pageSize):(page * pageSize) + pageSize]
   return terms
@@ -185,7 +185,7 @@ def get_templates():  # noqa: E501
         if 'ontology_accession' in ontology:
           accession = ontology['ontology_accession']
           cv = ontology['ontology']
-          ontology_term = OntologyTerm(accession, name, cv, None, None)
+          ontology_term = OntologyTerm(id = accession, name = name, ontology = cv, iri_id=ontology['ols_uri'])
         column = TemplateColumn(name, type, ontology_term)
         columns.append(column)
       template = Template(yaml_file['template']['name'], yaml_file['template']['type'],
