@@ -112,6 +112,7 @@ This will returns all the post-translational modifications that contains the wor
   }
 ]
 ```
+
 A post-translation modification contains the following attributes:
 
 - chemicalFormula: "H(-2) O",
