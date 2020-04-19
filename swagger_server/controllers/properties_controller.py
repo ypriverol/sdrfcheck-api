@@ -152,7 +152,7 @@ def get_properties_from_text(sdrf_properties):  # noqa: E501
         ontology = columns[yaml_column]
         accession = ontology['ontology_accession']
         cv = ontology['ontology']
-        ontology_term = OntologyTerm(accession, yaml_column, cv, None, None)
+        ontology_term = OntologyTerm(id = accession, name = yaml_column, ontology = cv, iri_id=ontology['ols_uri'])
         column = TemplateColumn(yaml_column, type, ontology_term)
         map_columns.append(MapTemplateColumn(ontology_text, column))
   return map_columns
