@@ -43,3 +43,41 @@ The `TemplateColumn` object contains a set of properties that facilitate to sear
    - "iri_id": IRI accession for the ontology term in OLS
    - "name": Name of the ontology term
    - "ontology": Ontology that contains the ontology term.
+
+### GET /properties/findValuesByProperty
+
+This endpoint allows to search values under an specific Ontology term. For example, it allows to search taxonomies under characteristics[organism] like Homo sapiens. The endpoint has the following parameters:
+
+- accession: IRI identifier in OLS for the pattern term to search under. For example for organism: http://purl.obolibrary.org/obo/OBI_0100026
+- ontology: The ontology where the term belong to. Some terms (e.g. organism) use the same IRI identifier in different ontologies, for that reason the ontology prefix should be provided (e.g EFO)
+- filter: The `keyword` to be search in the children terms.
+- page: Page to be provided 0-based.
+- pageSize: Number of elements or Ontology terms to be provided in the result list (default: 100)
+
+An example result list, for the query:
+
+```json
+GET /properties/findValuesByProperty?accession=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FOBI_0100026&ontology=EFO&filter=homo&pageSize=100
+```
+
+The results object list:
+
+```json
+[
+  {
+    "id": "NCBITaxon:9606",
+    "iri_id": "http://purl.obolibrary.org/obo/NCBITaxon_9606",
+    "name": "Homo sapiens",
+    "ontology": "EFO"
+  },
+  {
+    "id": "EFO:0004000",
+    "iri_id": "http://www.ebi.ac.uk/efo/EFO_0004000",
+    "name": "Mus musculus strain type",
+    "ontology": "EFO"
+  }
+]
+```
+
+The result is a list of Ontology Terms.
+
