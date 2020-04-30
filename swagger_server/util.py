@@ -173,7 +173,9 @@ def setup_logging(default_path='logging.yaml', default_level=logging.DEBUG, env_
 
 def get_ontology_text_from_columnname(text_properties: str = None):
   m = re.search(r"\[(.*?)\]", text_properties)
-  term = m.group(1)
+  term = None
+  if m is not None:
+    term = m.group(1)
   return term
 
 

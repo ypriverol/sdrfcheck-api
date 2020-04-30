@@ -143,16 +143,20 @@ def get_properties_from_text(sdrf_properties):  # noqa: E501
         ontology_term = None
         columns[yaml_column] = ontology
 
-  for yaml_column in columns:
-    for ontology_text in sdrf_properties:
+  for ontology_text in sdrf_properties:
+    for yaml_column in columns:
       text_key = get_ontology_text_from_columnname(ontology_text)
-      if compare_string(text_key, yaml_column):
+      if text_key is not None and compare_string(text_key, yaml_column):
         ontology = columns[yaml_column]
         accession = ontology['ontology_accession']
         cv = ontology['ontology']
         ontology_term = OntologyTerm(id = accession, name = yaml_column, ontology = cv, iri_id=ontology['ols_uri'])
         column = TemplateColumn(name = yaml_column, type_node=type, ontology_term = ontology_term, searchable=ontology['searchable'])
         map_columns.append(MapTemplateColumn(ontology_text, column))
+        break
+      if text_key is None:
+        map_columns.append(MapTemplateColumn(ontology_text, TemplateColumn(type_node='None', searchable=False)))
+        break
   return map_columns
 
 
