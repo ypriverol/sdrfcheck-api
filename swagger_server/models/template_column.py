@@ -203,3 +203,7 @@ class TemplateColumn(Model):
         """
 
         self._links = links
+
+    def __hash__(self) -> int:
+      return hash(self._name)
+

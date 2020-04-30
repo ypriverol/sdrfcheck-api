@@ -65,6 +65,25 @@ paths:
         "400":
           description: "Invalid schema value"
       x-swagger-router-controller: "swagger_server.controllers.properties_controller"
+  /properties/getProperties:
+    get:
+      tags:
+      - "properties"
+      summary: "Get all the posible properties"
+      operationId: "get_properties"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/TemplateColumn"
+        "400":
+          description: "Invalid schema value"
+      x-swagger-router-controller: "swagger_server.controllers.properties_controller"
   /properties/findSampleProperties:
     get:
       tags:

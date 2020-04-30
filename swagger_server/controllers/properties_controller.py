@@ -97,6 +97,54 @@ def find_values_by_property(accession, ontology, filter=None, page=None, pageSiz
   terms = terms[(page * pageSize):(page * pageSize) + pageSize]
   return terms
 
+def get_properties():  # noqa: E501
+  """Get all the posible properties
+
+  :rtype: List[TemplateColumn]
+  """
+  relevant_path = str(pathlib.Path(__file__).parent) + "/" + "../resources/templates/"
+  included_extensions = ['yaml']
+  file_names = [fn for fn in os.listdir(relevant_path)
+                if any(fn.endswith(ext) for ext in included_extensions)]
+  map_columns = []
+  columns = {}
+  for file_name in file_names:
+    with open(relevant_path + os.sep + file_name) as file:
+      # The FullLoader parameter handles the conversion from YAML
+      # scalar values to Python the dictionary format
+      yaml_file = yaml.load(file, Loader=yaml.FullLoader)
+      for yaml_column in yaml_file['template']['columns']:
+        name = yaml_column
+        ontology = yaml_file['template']['columns'][yaml_column]
+        type = ontology['type']
+        ontology_term = None
+        columns[yaml_column] = ontology
+
+  relevant_path = str(pathlib.Path(__file__).parent) + "/" + "../resources/terms/"
+  included_extensions = ['yaml']
+  file_names = [fn for fn in os.listdir(relevant_path)
+                if any(fn.endswith(ext) for ext in included_extensions)]
+
+  for file_name in file_names:
+    with open(relevant_path + os.sep + file_name) as file:
+      # The FullLoader parameter handles the conversion from YAML
+      # scalar values to Python the dictionary format
+      yaml_file = yaml.load(file, Loader=yaml.FullLoader)
+      for yaml_column in yaml_file['terms']:
+        ontology = yaml_file['terms'][yaml_column]
+        type = ontology['type']
+        columns[yaml_column] = ontology
+
+  for yaml_column in columns:
+      ontology = columns[yaml_column]
+      ontology_term = None
+      if 'ontology_accession' in ontology:
+        accession = ontology['ontology_accession']
+        cv = ontology['ontology']
+        ontology_term = OntologyTerm(id=accession, name=yaml_column, ontology=cv, iri_id=ontology['ols_uri'])
+      column = TemplateColumn(name=yaml_column, type_node=ontology['type'], ontology_term=ontology_term, searchable=ontology['searchable'])
+      map_columns.append(column)
+  return list(set(map_columns))
 
 def get_properties_from_text(sdrf_properties):  # noqa: E501
   """
