@@ -17,4 +17,15 @@ terms:
     ontology: SO
     ols_uri:  http://purl.obolibrary.org/obo/SO_0001217
     searchable: false
-
+  precursor mass tolerance:
+    type: comment
+    ontology_accession: "PRIDE:0000575"
+    ontology: PRIDE
+    ols_uri:  http://purl.obolibrary.org/obo/PRIDE_0000575
+    searchable: false
+  fragment mass tolerance:
+    type: comment
+    ontology_accession: "PRIDE:0000576"
+    ontology: PRIDE
+    ols_uri:  http://purl.obolibrary.org/obo/PRIDE_0000576
+    searchable: false
