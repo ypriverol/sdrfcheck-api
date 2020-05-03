@@ -29,3 +29,7 @@ terms:
     ontology: PRIDE
     ols_uri:  http://purl.obolibrary.org/obo/PRIDE_0000576
     searchable: false
+  Material Type:
+    type: None
+    searchable: false
+
