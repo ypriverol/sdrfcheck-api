@@ -32,4 +32,12 @@ terms:
   Material Type:
     type: None
     searchable: false
+  file uri:
+    type: comment
+    ontology_accession: "PRIDE:0000577"
+    ontology: PRIDE
+    ols_uri:  http://purl.obolibrary.org/obo/PRIDE_0000577
+    searchable: false
+
+
 
