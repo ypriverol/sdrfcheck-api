@@ -36,6 +36,12 @@ template:
       ontology: MS
       ols_uri: http://purl.obolibrary.org/obo/MS_1000031
       searchable: true
+    cleavage agent details:
+      type: comment
+      ontology_accession: "MS:1001044"
+      ontology: MS
+      ols_uri: http://purl.obolibrary.org/obo/MS_1001044
+      searchable: true
     modification parameters:
       type: comment
       ontology_accession: "MS:1001055"

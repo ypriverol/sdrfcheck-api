@@ -38,12 +38,7 @@ terms:
     ontology: PRIDE
     ols_uri:  http://purl.obolibrary.org/obo/PRIDE_0000577
     searchable: false
-  cleavage agent details:
-    type: comment
-    ontology_accession: "MS:1001044"
-    ontology: MS
-    ols_uri: http://purl.obolibrary.org/obo/MS_1001044
-    searchable: true
+
 
 
 
