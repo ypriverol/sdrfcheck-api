@@ -42,3 +42,86 @@ docker build -t swagger_server .
 # starting up a container
 docker run -p 8090:8090 swagger_server
 ```
+
+## Adding new Templates
+
+Templates are a predefine structure for the SDRF, with fields that the user or community have agreed that needs to be provided. For example, [the default-ms.yaml](https://github.com/bigbio/sdrfcheck-api/blob/master/swagger_server/resources/templates/default-ms.yaml) is the template for mass spectrometry data including properties to encode post-translational modifications, tolerances, instruments.
+
+The structure of the template is like:
+
+```yaml
+template:
+  name: Default Mass Spectrometry Template
+  type: Data
+  description: The default sample metadata template for any type of omics submission
+  columns:
+    assay name:
+      type: None
+      searchable: false
+    fraction identifier:
+      type: comment
+      ontology_accession: "MS:1000858"
+      ontology: MS
+      ols_uri: http://purl.obolibrary.org/obo/MS_1000858
+      searchable: false
+    label:
+      type: comment
+      ontology_accession: "PRIDE:0000514"
+      ontology: PRIDE
+      ols_uri: http://www.ebi.ac.uk/pride/PRIDE_0000514
+      searchable: true
+    modification parameters:
+      type: comment
+      ontology_accession: "MS:1001055"
+      ontology: MS
+      ols_uri: http://purl.obolibrary.org/obo/MS_1001055
+      searchable: true
+      otherSearchTerm:
+        - ontology_accession: "UNIMOD:0"
+          ontology: UNIMOD
+          name: "unimod root node"
+          ols_uri: http://purl.obolibrary.org/obo/UNIMOD_0
+```
+
+It includes the following fields:
+
+- name: Name of the template
+- type: Type of the template (Data or Sample), templates related with sample organize the way the sample is capture and annotated, while templates related with Data capture the way data is annotated.
+- description: Additional description of the template.
+- columns: A list of columns annotated as ontology terms.
+
+If the user/community wants to add a new template, you should do a PR in the repository and the core contributors and curators of the API will review the PR and merged into the `master` branch. The new changes will be automatically deploy.
+
+## Adding additional terms
+
+In many cases new terms are added to the SDRF that they are not included in any Template. This can be considered "additional" to annotate the Sample or the Data. If the community/user wants to add terms into the application, it should perform a Pull request in the application modifying the following file [other_terms.yaml](https://github.com/bigbio/sdrfcheck-api/blob/master/swagger_server/resources/terms/other_terms.yaml)
+
+The structure of the other_terms.yaml file is:
+
+```yaml
+terms:
+  bait:
+    type: characteristics
+    ontology_accession: "OBI:0100026"
+    ontology: MI
+    ols_uri: http://purl.obolibrary.org/obo/MI_0496
+    searchable: false
+  concentration of:
+    type: characteristics
+    ontology_accession: "PATO:0000033"
+    ontology: PATO
+    ols_uri: http://purl.obolibrary.org/obo/PATO_0000033
+    searchable: false
+  protein_coding_gene:
+    type: characteristics
+    ontology_accession: "SO:0001217"
+    ontology: SO
+    ols_uri:  http://purl.obolibrary.org/obo/SO_0001217
+    searchable: false
+  precursor mass tolerance:
+    type: comment
+    ontology_accession: "PRIDE:0000575"
+    ontology: PRIDE
+    ols_uri:  http://purl.obolibrary.org/obo/PRIDE_0000575
+    searchable: false
+```
