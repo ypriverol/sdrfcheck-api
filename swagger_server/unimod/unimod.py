@@ -1,3 +1,4 @@
+import pathlib
 import re
 import xml.etree.ElementTree as et
 
@@ -13,7 +14,7 @@ class UnimodDatabase:
   hidden = True
 
   def __init__(self, **kwargs):
-    self.unimodfile = kwargs.get("file", "resources/unimod.xml")
+    self.unimodfile = str(pathlib.Path(__file__).parent) + "/" + "../resources/unimod.xml"
     self.hidden = kwargs.get("hidden", True)
     node = et.parse(self.unimodfile)
     root = node.getroot()
